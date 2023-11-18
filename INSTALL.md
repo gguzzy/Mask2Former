@@ -1,7 +1,7 @@
 ## Installation
 
 ### Requirements
-- Linux or macOS with Python ≥ 3.6
+- Linux or macOS with Python = 3.8 (is strongly recommended) and CUDA 11.1 (as cudatoolbox-kit, is strongly recommended, please visit https://detectron2.readthedocs.io/en/latest/tutorials/install.html to know more about compabilities). 
 - PyTorch ≥ 1.9 and [torchvision](https://github.com/pytorch/vision/) that matches the PyTorch installation.
   Install them together at [pytorch.org](https://pytorch.org) to make sure of this. Note, please check
   PyTorch version matches that is required by Detectron2.
@@ -29,6 +29,7 @@ TORCH_CUDA_ARCH_LIST='8.0' FORCE_CUDA=1 python setup.py build install
 ```bash
 conda create --name mask2former python=3.8 -y
 conda activate mask2former
+# Install cudatoolkit=11.1 using regular link at https://developer.nvidia.com/cuda-11.1.0-download-archive?target_os=Windows&target_arch=x86_64
 conda install pytorch==1.9.0 torchvision==0.10.0 cudatoolkit=11.1 -c pytorch -c nvidia
 pip install -U opencv-python
 
