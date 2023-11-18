@@ -29,8 +29,11 @@ TORCH_CUDA_ARCH_LIST='8.0' FORCE_CUDA=1 python setup.py build install
 ```bash
 conda create --name mask2former python=3.8 -y
 conda activate mask2former
-# Install cudatoolkit=11.1 using regular link at https://developer.nvidia.com/cuda-11.1.0-download-archive?target_os=Windows&target_arch=x86_64
+# Use this one if you do not want to install cudatoolkit=11.1 using
+# regular link at https://developer.nvidia.com/cuda-11.1.0-download-archive?target_os=Windows&target_arch=x86_64
 conda install pytorch==1.9.0 torchvision==0.10.0 cudatoolkit=11.1 -c pytorch -c nvidia
+# If you install cuda toolkit before, first install cuda then run this below (not the one above)
+conda install pytorch==1.9.0 torchvision==0.10.0 -c pytorch
 pip install -U opencv-python
 
 # under your working directory
