@@ -9,19 +9,37 @@
 - OpenCV is optional but needed by demo and visualization
 - `pip install -r requirements.txt`
 
-### Environment using Python3.8, pip and Windows 
+### Environment using: Python 3.8, torch==1.9.0, cudatoolkit=11.1  
 ```bash
 pip install --upgrade pip
-pip install torch==1.9.0+cu113 torchvision==0.10.0+cu113 torchaudio==0.9.0 -f https://download.pytorch.org/whl/torch_stable.html
+pip install torch==1.9.0+cu111 torchvision==0.10.0+cu111 torchaudio==0.9.0 -f https://download.pytorch.org/whl/torch_stable.html
 pip install -U opencv-python
 
-# under your working directory
-git clone [git@github.com:facebookresearch/detectron2.git](https://github.com/facebookresearch/detectron2.git)
+# it is recommended to install wheel
+pip install --upgrade wheel (--user)
+
+# Install detectron2 as package, under your project location (i.e. working directory)
+git clone https://github.com/facebookresearch/detectron2.git
 cd detectron2
 pip install -e .
+
+# Generally the structure of the project will be something as:
+
+/working_directory
+
+# Install and download COCO dataset
 pip install git+https://github.com/cocodataset/panopticapi.git
+# At this stage you need to download the coco dataset from their official website
+
+# It is recommened to download all regarding COCO 2017 dataset, which means:
+# train2017, eval2017, test2017 recalling that you need to insert those in
+# '/detectron2/datasets/coco/annotations'
+
+# Install and download Citiscrapes
 pip install git+https://github.com/mcordts/cityscapesScripts.git
 
+# Now, we can replicate our project cloning it into our working directory
+# Let's go back to the previous and current
 cd ..
 git clone git@github.com:facebookresearch/Mask2Former.git
 cd Mask2Former
@@ -66,4 +84,20 @@ cd Mask2Former
 pip install -r requirements.txt
 cd mask2former/modeling/pixel_decoder/ops
 sh make.sh
+
+```code
+
+#### Run properly your training
+`You need to manually edit '__init__' version from your original into 
+import tensorboard
+from distutils.version import LooseVersion
+
+if not hasattr(tensorboard, '__version__') or LooseVersion(tensorboard.__version__) < LooseVersion('1.15'):
+raise ImportError('TensorBoard logging requires TensorBoard version 1.15 or above')
+
+del LooseVersion
+del tensorboard
+
+from .writer import FileWriter, SummaryWriter  # noqa: F401
+from tensorboard.summary.writer.record_writer import RecordWriter  # noqa: F401
 ```
